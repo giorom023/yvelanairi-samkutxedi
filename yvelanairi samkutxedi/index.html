@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>სამკუთხედის გრადუსული ზომა, პერიმეტრი და ბისექტრის გამოთვლა</title>
+  </head>
+  <body>
+    <h1>სამკუთხედის გრადუსული ზომა, პერიმეტრი და ბისექტრის გამოთვლა</h1>
+
+    <label for="side-a">მხარე A:</label>
+    <input type="number" id="side-a" min="0" step="any" /><br /><br />
+
+    <label for="side-b">მხარე B:</label>
+    <input type="number" id="side-b" min="0" step="any" /><br /><br />
+
+    <label for="side-c">მხარე C:</label>
+    <input type="number" id="side-c" min="0" step="any" /><br /><br />
+
+    <button onclick="calculateTriangle()">გამოთვლა</button><br /><br />
+
+    <p id="result"></p>
+
+    <script>
+      function calculateTriangle() {
+        let sideA = parseFloat(document.getElementById("side-a").value);
+        let sideB = parseFloat(document.getElementById("side-b").value);
+        let sideC = parseFloat(document.getElementById("side-c").value);
+
+        if (sideA > 0 && sideB > 0 && sideC > 0) {
+          let area = calculateArea(sideA, sideB, sideC);
+          let perimeter = sideA + sideB + sideC;
+
+          let circumradius = (sideA * sideB * sideC) / (4 * area);
+
+          document.getElementById("result").innerHTML = `
+          სამკუთხედის გრადუსული ზომა: ${area.toFixed(2)}<br>
+          სამკუთხედის პერიმეტრი: ${perimeter.toFixed(2)}<br>
+          სამკუთხედის ბისექტრი: ${circumradius.toFixed(2)}
+        `;
+        } else {
+          alert("გთხოვთ, შეიყვანეთ სწორი რიცხვები ყველა მხარეს.");
+        }
+      }
+
+      function calculateArea(a, b, c) {
+        let s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+      }
+    </script>
+  </body>
+</html>
